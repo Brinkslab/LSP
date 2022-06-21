@@ -3,6 +3,7 @@ The provided code is part of the Supplementary Material of the article "Analytic
 
 # File overview
 <i>field_enhancement.lsf</i> - Lumerical script to simulate the results plotted in Fig. 5
+
 <i>graph_generator_supplInfor.py</i> - Python code to generate Figs. 4, 6 and 7
 
 # Use and Adaptation
