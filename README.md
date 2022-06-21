@@ -6,6 +6,8 @@ The provided code is part of the Supplementary Material of the article "Analytic
 
 <i>field_enhancement_plot.py</i> - Python code to generate the color maps in Fig. 5
 
+<i>cross_sections.lsf</i> - Lumerical script to simulate the cross sections of Fig. 7
+
 <i>graph_generator_supplInfor.py</i> - Python code to generate Figs. 4, 6 and 7
 
 # Use and Adaptation
