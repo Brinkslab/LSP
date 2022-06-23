@@ -93,7 +93,7 @@ def calculate_peak(r,eh=1,surfscatter=False,mlwa=False):
     #Imaginary part of the dielectric function
     em_i=(wp**2*g)/(w**3+g**2*w)
     #Complex dielectric function
-    em=em_r+em_i*i
+    em=em_r-em_i*i
     
     #Volume of the nanoparticle
     v=(4/3*np.pi*r**3)
@@ -102,7 +102,7 @@ def calculate_peak(r,eh=1,surfscatter=False,mlwa=False):
     a=3*v*(em-eh)/(em+2*eh)
     
     if mlwa:
-        MLWA=1/(1-a/(4*np.pi)*((k*np.sqrt(eh))**2/r+i*2/3*(k*np.sqrt(eh))**3))
+        MLWA=1/(1-a/(4*np.pi)*((k*np.sqrt(eh))**2/r-i*2/3*(k*np.sqrt(eh))**3))
         a=a*MLWA
     return a/v
 
@@ -122,15 +122,15 @@ def calculate_peak_ellipsoid(ax,ay,az,eh=1,surfscatter=True,mlwa=True):
     #Calculate the complex dielectric function in the three directions
     em_rx=em_inf-(wp**2)/(w**2+gx**2)
     em_ix=(wp**2*gx)/(w**3+gx**2*w)
-    emx=em_rx+em_ix*i
+    emx=em_rx-em_ix*i
     
     em_ry=em_inf-(wp**2)/(w**2+gy**2)
     em_iy=(wp**2*gy)/(w**3+gy**2*w)
-    emy=em_ry+em_iy*i
+    emy=em_ry-em_iy*i
     
     em_rz=em_inf-(wp**2)/(w**2+gz**2)
     em_iz=(wp**2*gz)/(w**3+gz**2*w)
-    emz=em_rz+em_iz*i
+    emz=em_rz-em_iz*i
     
     #Volume of the nanoparticle
     v=4/3*np.pi*ax*ay*az
@@ -149,9 +149,9 @@ def calculate_peak_ellipsoid(ax,ay,az,eh=1,surfscatter=True,mlwa=True):
     alphaz=v*(emz-eh)/(eh+Lz*(emz-eh))
     
     if mlwa:
-        MLWAx=1/(1-alphax/(4*np.pi)*((k*np.sqrt(eh))**2/ax+i*2/3*(k*np.sqrt(eh))**3))
-        MLWAy=1/(1-alphay/(4*np.pi)*((k*np.sqrt(eh))**2/ay+i*2/3*(k*np.sqrt(eh))**3))
-        MLWAz=1/(1-alphaz/(4*np.pi)*((k*np.sqrt(eh))**2/az+i*2/3*(k*np.sqrt(eh))**3))
+        MLWAx=1/(1-alphax/(4*np.pi)*((k*np.sqrt(eh))**2/ax-i*2/3*(k*np.sqrt(eh))**3))
+        MLWAy=1/(1-alphay/(4*np.pi)*((k*np.sqrt(eh))**2/ay-i*2/3*(k*np.sqrt(eh))**3))
+        MLWAz=1/(1-alphaz/(4*np.pi)*((k*np.sqrt(eh))**2/az-i*2/3*(k*np.sqrt(eh))**3))
         alphax=alphax*MLWAx
         alphay=alphay*MLWAy
         alphaz=alphaz*MLWAz
@@ -179,7 +179,7 @@ def cross_sections_sphere(r,alpha,eh):
     alpha=alpha*v   
     
     #Cross section calculation using Rayleigh formulas
-    cs_abs=(k*np.sqrt(eh))*np.imag(alpha)
+    cs_abs=-(k*np.sqrt(eh))*np.imag(alpha)
     cs_sca=((k*np.sqrt(eh))**4/(6*np.pi))*(np.abs(alpha))**2
     return cs_abs, cs_sca
 
@@ -197,9 +197,9 @@ def cross_sections(ax,ay,az,alphax,alphay,alphaz,eh):
     alphaz=alphaz*v
     
     #Cross section calculation using Rayleigh formulas for each semiaxis
-    cs_abs_x=(k*np.sqrt(eh))*np.imag(alphax)
-    cs_abs_y=(k*np.sqrt(eh))*np.imag(alphay)
-    cs_abs_z=(k*np.sqrt(eh))*np.imag(alphaz)    
+    cs_abs_x=-(k*np.sqrt(eh))*np.imag(alphax)
+    cs_abs_y=-(k*np.sqrt(eh))*np.imag(alphay)
+    cs_abs_z=-(k*np.sqrt(eh))*np.imag(alphaz)    
     cs_sca_x=((k*np.sqrt(eh))**4/(6*np.pi))*(np.abs(alphax))**2
     cs_sca_y=((k*np.sqrt(eh))**4/(6*np.pi))*(np.abs(alphay))**2
     cs_sca_z=((k*np.sqrt(eh))**4/(6*np.pi))*(np.abs(alphaz))**2
